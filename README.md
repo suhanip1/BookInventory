@@ -1,13 +1,14 @@
 # BookInventory
 
-#Installation
+## Installation
 
-##Prerequisites
+
+### Prerequisites
 Node.js and npm installed on your machine.
 Python and pip installed on your machine.
 
 
-###BSetup
+### Setup
 1. Navigate to the backend directory:
    ```sh
    cd backend
@@ -22,7 +23,6 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 4. Start the Django development server:
-
-   ```sh
-   python manage.py runserver
-   ```
+```sh
+python manage.py runserver
+```
