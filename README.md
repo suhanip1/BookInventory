@@ -29,3 +29,7 @@ python manage.py runserver
 
 ### Running the Application
 Once the backend server is running, you can access the application in your web browser at http://localhost:8000.
+
+### Challenges Faced
+One challenge I faced was having to restrict myself on the design aspect due to having very less time to work on it and making most of it.
+
