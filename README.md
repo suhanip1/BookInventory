@@ -26,3 +26,6 @@ python manage.py migrate
 ```sh
 python manage.py runserver
 ```
+
+### Running the Application
+Once the backend server is running, you can access the application in your web browser at http://localhost:8000.
