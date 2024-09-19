@@ -8,15 +8,12 @@ from .serializers import InventorySerializer
 from django.shortcuts import render
 from rest_framework.permissions import AllowAny
 
-
 def inventory_view(request):
     return render(request, 'inventory.html')
 
-    
 @api_view(['GET', 'POST'])
 @permission_classes([AllowAny])
 def inventory_list_create(request):
-
     if request.method == 'GET':
         title = request.GET.get('title', None)
         author = request.GET.get('author', None)
@@ -38,40 +35,21 @@ def inventory_list_create(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        data = request.data
-        title = data.get('title')
-        author = data.get('author')
-        genre = data.get('genre')
-        publication_date = data.get('publication_date')
-        isbn = data.get('isbn')
-
-        if not all([title, author, genre, publication_date, isbn]):
-            return Response({"error": "All fields are required."}, status=status.HTTP_400_BAD_REQUEST)
-
-        new_book = Inventory.objects.create(
-            title=title,
-            author=author,
-            genre=genre,
-            publication_date=publication_date,
-            isbn=isbn
-        )
-
-        serializer = InventorySerializer(new_book)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-
+        serializer = InventorySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['DELETE'])
 @permission_classes([AllowAny])
 def inventory_delete(request, pk):
-    print(pk)
     try:
         book = Inventory.objects.get(pk=pk)
-        print(book)
         book.delete()
         return Response({"message": "Book deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
     except Inventory.DoesNotExist:
         return Response({"error": "Book not found."}, status=status.HTTP_404_NOT_FOUND)
-
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
