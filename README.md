@@ -10,9 +10,9 @@ Python and pip installed on your machine.
 
 ### Setup
 1. Navigate to the backend directory:
-   ```sh
-   cd backend
-   ```
+```sh
+cd backend
+```
 2. Install the required Python packages:
   ```sh
   pip install -r requirements.txt
